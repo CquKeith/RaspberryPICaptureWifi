@@ -1,12 +1,15 @@
 import subprocess
 
-def excuteCommand(com):
-    ex = subprocess.Popen(com, stdout=subprocess.PIPE, shell=True)
-    out, err  = ex.communicate()
-    status = ex.wait(timeout=10*1000)
-    print("cmd in:", com)
+def excuteCommand(cmd):
+    process = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
+    out, err = process.communicate()
+    status = process.wait(timeout=10 * 1000)
+    process.kill()
+    print("cmd in:", cmd)
     print("cmd out: ", out)
     return out
 
+
 if __name__ == '__main__':
-    excuteCommand('sudo airodump-ng wlan0')
+    excuteCommand("ls *.py")
+    # excuteCommand('sudo airodump-ng wlan0')
